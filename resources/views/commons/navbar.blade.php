@@ -9,8 +9,12 @@
         <div class="collapse navbar-collapse" id="nav-bar">
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
-                <li class="nav-item"><a href="#" class="nav-link">Signup</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Login</a></li>
+            @if (Auth::check())
+                  <li class="nav-item ml-2"><a href="{{ route('logout') }}">Logout</a></li>
+                @else
+                  <li class="nav-item"><a href="{{ route('signup.get') }}">Signup</a></li>
+                  <li class="nav-item ml-2"><a href="{{ route('login') }}">Login</a></li>
+                @endif
             </ul>
         </div>
     </nav>
