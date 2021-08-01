@@ -8,7 +8,7 @@
                         {{ $user->name }}
                     </div>
                     <div>
-                        <p><a href="">view profile</a></p>
+                        <p><a href="{{route('users.show',$user->id) }}">view profile</a></p>
                     </div>
                 </div>
             </li>

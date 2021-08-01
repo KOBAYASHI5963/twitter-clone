@@ -12,6 +12,7 @@
                 @if (Auth::check())
                   <li class="nav-item ml-2"><a href="{{ route('logout') }}">Logout</a></li>
                   <li class="nav-item ml-2"><a href="{{ route('users.index') }}">Users</a></li>
+                  <li class="nav-item ml-2"><a href="{{ route('users.show',Auth::id()) }}">My profile</a></li>
                 @else
                   <li class="nav-item"><a href="{{ route('signup.get') }}">Signup</a></li>
                   <li class="nav-item ml-2"><a href="{{ route('login') }}">Login</a></li>
