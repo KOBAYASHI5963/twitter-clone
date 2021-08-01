@@ -9,8 +9,9 @@
         <div class="collapse navbar-collapse" id="nav-bar">
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
-            @if (Auth::check())
+                @if (Auth::check())
                   <li class="nav-item ml-2"><a href="{{ route('logout') }}">Logout</a></li>
+                  <li class="nav-item ml-2"><a href="{{ route('users.index') }}">Users</a></li>
                 @else
                   <li class="nav-item"><a href="{{ route('signup.get') }}">Signup</a></li>
                   <li class="nav-item ml-2"><a href="{{ route('login') }}">Login</a></li>
