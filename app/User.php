@@ -92,6 +92,36 @@ class User extends Authenticatable
         return Micropost::whereIn('user_id', $follow_user_ids);
     }
 
+    public function favorites()
+    {
+        return $this->belongsToMany(Micropost::class, 'favorites', 'micropost_id', 'user_id')->withTimestamps();
+    }
+    
+        public function favorite($micropostId)
+    {   
+
+        $exist = $this->is_favorite($micropostId);
+
+        $its_me = $this->id == $micropostId;
+ 
+        if ($exist || $its_me) {
+
+ 
+        return false;
+        } else {
+
+        $this->favorite()->attach($micropostId);
+        return true;
+        }
+ 
+    }
+
+    public function is_favorite($micropostId)
+    {
+
+        return $this->favorite()->where('micropost_id', $userId)->exists();
+    }
+    
     /**
      * The attributes that should be cast to native types.
      *
