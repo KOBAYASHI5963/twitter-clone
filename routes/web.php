@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'MicropostsController@index');
+Route::get('/', 'MicropostsController@index')->name('top');
 
 // Auth::routes();
 
@@ -25,7 +25,11 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::group(['middleware' => ['auth']], function () {
+
+Route::get('aa', 'UsersController@aa')->name('aa');
+
+
+Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
 
     Route::group(['prefix' => 'users/{id}'], function () {
@@ -33,13 +37,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
         Route::get('followings', 'UsersController@followings')->name('users.followings');
         Route::get('followers', 'UsersController@followers')->name('users.followers');
-        Route::get('favorites', 'UsersController@favorites')->name('users.favorites'); 
-    });
-    
-    Route::group(['prefix' => 'microposts/{id}'], function () {
-        Route::post('favorite', 'FavoritesController@store')->name('user.favorite');
-        Route::delete('unfavorite', 'FavoritesController@destroy')->name('user.unfavorite');
+        Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
     });
 
+    Route::group(['prefix' => 'microposts/{id}'], function () {
+        Route::post('favorite', 'FavoritesController@store')->name('favorites.favorite');
+        Route::delete('unfavorite', 'FavoritesController@destroy')->name('favorites.unfavorite');
+    });
     Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
 });

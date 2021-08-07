@@ -8,7 +8,7 @@ class FavoritesController extends Controller
 {
     public function store($id)
     {
-        \Auth::user()->favorite($micropostId);
+        \Auth::user()->favorite($id);
         return back();
     }
 
